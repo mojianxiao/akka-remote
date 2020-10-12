@@ -17,7 +17,7 @@ public class RemoteActorSystemDemo {
         ActorSystem sys = ActorSystem.create("sys", ConfigFactory.load("remote.conf"));
         ActorRef ref = sys.actorOf(Props.create(SimpleActor.class), "simpleActor");
         //按照path注册到akka 2552端口
-        ActorSelection actorSelection = sys.actorSelection("akka.tcp://sys@127.0.0.1:2552/user/simpleActor");
+        ActorSelection actorSelection = sys.actorSelection("akka.tcp://sys@192.168.93.68:2552/user/simpleActor");
         //简单的本地测试
         actorSelection.tell("tttt", ActorRef.noSender());
     }
