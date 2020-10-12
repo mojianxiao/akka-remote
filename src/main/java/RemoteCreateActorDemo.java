@@ -19,7 +19,8 @@ public class RemoteCreateActorDemo {
         ActorSystem system = ActorSystem.create("sys", ConfigFactory.load("remoteactor.conf"));
         Address address = new Address("akka.tcp", "sys", "127.0.0.1", 2552);
         //将RmtCreateActor发布到远程127.0.0.1:2552上
-        ActorRef ref = system.actorOf(Props.create(RmtCreateActor.class).withDeploy(new Deploy(new RemoteScope(address))), "rmtCrtActor");
-        ref.tell("hello rmt", ActorRef.noSender());
+        //ActorRef ref = system.actorOf(Props.create(RemoteActorSystemDemo.SimpleActor.class).withDeploy(new Deploy(new RemoteScope(address))), "simpleActor");
+        ActorSelection actorSelection = system.actorSelection("akka.tcp://sys@127.0.0.1:2552/user/simpleActor");
+        actorSelection.tell("hello rmt", ActorRef.noSender());
     }
 }
